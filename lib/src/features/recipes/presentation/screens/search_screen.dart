@@ -11,38 +11,38 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  final TextEditingController _controller = TextEditingController();
+  final RecipeApiService _apiService = RecipeApiService();
+  List<Recipe>? _recipes = [];
+  bool _isLoading = false; //para manejar el estado de carga
+
+  //funcion de busqueda
+  void searchRecipes() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      //obtener lista de recetas
+      final myRecipes = await _apiService.fetchRecipes(_controller.text);
+
+      setState(() {
+        _recipes = myRecipes;
+      });
+    } catch (e) {
+      // Manejo de errores
+      const SnackBar(content: Text('No se encontraron recetas.'));
+      debugPrint("error: $e");
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-
-    final TextEditingController controller = TextEditingController();
-    final RecipeApiService apiService = RecipeApiService();
-    List<Recipe>? recipes;
-    bool isLoading = false; //para manejar el estado de carga
-
-    //funciones de busqueda
-    void searchRecipes() async {
-      setState(() {
-        isLoading = true;
-      });
-
-      try {
-        //obtener lista de recetas
-        final myRecipes = await apiService.fetchRecipes(controller.text);
-        
-        setState(() {
-          recipes = myRecipes;
-        });
-      } catch (e) {
-        // Manejo de errores
-        const SnackBar(content: Text('No se encontraron recetas.'));
-        debugPrint("error: $e");
-      } finally {
-        setState(() {
-          isLoading = false;
-        });
-      }
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -58,20 +58,22 @@ class _SearchScreenState extends State<SearchScreen> {
         child: Column(
           children: [
             SearchBar(
-              controller: controller,
+              controller: _controller,
               onSubmitted: (value) {
-                searchRecipes();
+                searchRecipes(); // Ejecutar búsqueda cuando el usuario envíe la búsqueda.
               },
               hintText: 'Ingrese el nombre de la comida',
               leading: const Icon(Icons.search),
             ),
-            const SizedBox(height: 100),
-            isLoading
+            const SizedBox(height: 20),
+            _isLoading
                 ? const CircularProgressIndicator()
-                : recipes != null
-                    ? const RecipeList()
-                    : Text('No se encontraron recetas.',
-                        style: TextStyle(color: color.onPrimary)),
+                : _recipes != null && _recipes!.isNotEmpty
+                    ? RecipeList(recipes: _recipes!)
+                    : Text(
+                        'No se encontraron recetas.',
+                        style: TextStyle(color: color.onPrimary),
+                      ),
           ],
         ),
       ),

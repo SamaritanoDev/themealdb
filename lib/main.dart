@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:themealdb/src/features/recipes/presentation/screens/recipe_detail_screen.dart';
 import 'package:themealdb/src/features/recipes/presentation/screens/search_screen.dart';
 
 void main() {
@@ -16,7 +15,6 @@ class MainApp extends StatelessWidget {
       initialRoute: '/meals',
       routes: {
         '/meals': (context) => const SearchScreen(),
-        '/mealDetails': (context) => const RecipeDetailScreen()
       },
     );
   }
