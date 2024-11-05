@@ -18,10 +18,9 @@ class RecipeDetailScreen extends StatelessWidget {
         backgroundColor: color.primary,
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
         color: color.primary,
-        child: const Column(
-          children: [],
+        child: const Center(
+          child: Text('paso el objeto Recipe'),
         ),
       ),
     );

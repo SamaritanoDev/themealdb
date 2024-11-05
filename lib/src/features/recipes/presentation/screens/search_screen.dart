@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:themealdb/src/features/recipes/presentation/widgets/recipe_list.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -11,9 +12,7 @@ class SearchScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'themealsdb',
-          style: TextStyle(
-            color: color.onPrimary,
-          ),
+          style: TextStyle(color: color.onPrimary),
         ),
         backgroundColor: color.primary,
       ),
@@ -26,6 +25,8 @@ class SearchScreen extends StatelessWidget {
               hintText: 'Ingrese el nombre de la comida',
               leading: Icon(Icons.search),
             ),
+            SizedBox(height: 100),
+            RecipeList()
           ],
         ),
       ),
