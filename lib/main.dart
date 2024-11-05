@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:themealdb/src/features/recipes/presentation/screens/search_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,12 +10,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp(
+      theme: ThemeData(colorSchemeSeed: Colors.deepPurpleAccent),
+      initialRoute: '/meals',
+      routes: {
+        '/meals': (context) => const SearchScreen(),
+      },
     );
   }
 }
