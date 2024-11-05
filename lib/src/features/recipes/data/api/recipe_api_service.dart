@@ -20,7 +20,7 @@ class RecipeApiService {
       // Convertimos la lista de meals a una lista de objetos Recipe
       return meals.map((meal) => Recipe.fromJson(meal)).toList();
     } else {
-      throw Exception('Failed to load recipes');
+      throw Exception('Falla en la carga de recetas.');
     }
   }
 }
