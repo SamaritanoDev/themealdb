@@ -8,7 +8,7 @@ class RecipeApiService {
       'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 
   Future<List<Recipe>> fetchRecipes(String meal) async {
-    final response = await http.get(Uri.parse(baseUrl + mealc));
+    final response = await http.get(Uri.parse(baseUrl + meal));
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
