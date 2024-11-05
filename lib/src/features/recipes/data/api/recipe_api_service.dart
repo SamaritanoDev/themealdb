@@ -7,8 +7,8 @@ class RecipeApiService {
   static const String baseUrl =
       'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 
-  Future<List<Recipe>> fetchRecipes(String query) async {
-    final response = await http.get(Uri.parse(baseUrl + query));
+  Future<List<Recipe>> fetchRecipes(String meal) async {
+    final response = await http.get(Uri.parse(baseUrl + mealc));
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
