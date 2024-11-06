@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:linkfy_text/linkfy_text.dart';
 import 'package:themealdb/src/features/recipes/data/models/recipe_model.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class RecipeDetailScreen extends StatelessWidget {
   final Recipe recipe;
@@ -40,19 +42,31 @@ class RecipeDetailScreen extends StatelessWidget {
             const SizedBox(height: 16.0),
             // Instrucciones
             const Text(
-              'Instrucciones:',
+              'Instructions:',
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8.0),
             Text(recipe.instructions),
+            const SizedBox(height: 8.0),
+            LinkifyText(
+              textStyle:
+                  TextStyle(fontWeight: FontWeight.bold, color: color.primary),
+              "Watch on YouTube: ${recipe.youtubeUrl}",
+              linkStyle: const TextStyle(
+                  color: Colors.blue, fontWeight: FontWeight.normal),
+              onTap: (link) {
+                _launchURL(recipe.youtubeUrl);
+              },
+            ),
             const SizedBox(height: 16.0),
             // Ingredientes
             const Text(
-              'Ingredientes:',
+              'Ingredients:',
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8.0),
             _buildIngredientsList(),
+            const SizedBox(height: 20.0),
           ],
         ),
       ),
@@ -65,10 +79,24 @@ class RecipeDetailScreen extends StatelessWidget {
     for (int i = 0; i < recipe.ingredients.length; i++) {
       if (recipe.ingredients[i].isNotEmpty) {
         ingredientWidgets.add(
-          Text('${recipe.measures[i]} ${recipe.ingredients[i]}'),
+          Row(
+            children: [
+              const Icon(Icons.check, size: 20.0),
+              Text('${recipe.measures[i]} ${recipe.ingredients[i]}'),
+            ],
+          ),
         );
       }
     }
     return Column(children: ingredientWidgets);
+  }
+
+//metodo para abrir un url
+  void _launchURL(String url) async {
+    if (await launchUrlString(url)) {
+      await launchUrlString(url);
+    } else {
+      throw 'No se pudo abrir el enlace $url';
+    }
   }
 }

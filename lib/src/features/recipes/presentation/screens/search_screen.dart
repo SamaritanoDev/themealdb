@@ -62,7 +62,7 @@ class _SearchScreenState extends State<SearchScreen> {
               onSubmitted: (value) {
                 searchRecipes(); // Ejecutar búsqueda cuando el usuario envíe la búsqueda.
               },
-              hintText: 'Ingrese el nombre de la comida',
+              hintText: 'What do you want to cook today?',
               leading: const Icon(Icons.search),
             ),
             const SizedBox(height: 20),
@@ -71,7 +71,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 : _recipes != null && _recipes!.isNotEmpty
                     ? RecipeList(recipes: _recipes!)
                     : Text(
-                        'No se encontraron recetas.',
+                        'No recipes found.',
                         style: TextStyle(color: color.onPrimary),
                       ),
           ],

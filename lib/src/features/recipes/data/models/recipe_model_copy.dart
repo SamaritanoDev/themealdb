@@ -24,10 +24,11 @@ class RecipeModel {
   }
 
   static List<String> _parseIngredients(Map<String, dynamic> json) {
-    // Parse ingredients from JSON
     List<String> ingredients = [];
+    // Intentamos obtener los ingredientes del JSON
     for (int i = 1; i <= 20; i++) {
-      final ingredient = json['strIngredient$i'];
+      final ingredientKey = 'strIngredient$i';
+      final ingredient = json[ingredientKey];
       if (ingredient != null && ingredient.isNotEmpty) {
         ingredients.add(ingredient);
       }
