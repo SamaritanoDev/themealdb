@@ -35,3 +35,7 @@ Crear una app de recetas en Flutter que permita buscar una receta por nombre, ve
 **Client:** Flutter, Packages: http, linkfy_text, url_launcher.
 
 **API:** API Rest
+
+## Screens
+![themealdb](https://github.com/user-attachments/assets/b130afc5-f1d0-4867-abba-18634fe4e5fa)
+
