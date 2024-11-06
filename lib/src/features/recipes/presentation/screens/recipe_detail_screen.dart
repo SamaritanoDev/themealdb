@@ -93,10 +93,6 @@ class RecipeDetailScreen extends StatelessWidget {
 
 //metodo para abrir un url
   void _launchURL(String url) async {
-    if (await launchUrlString(url)) {
-      await launchUrlString(url);
-    } else {
-      throw 'No se pudo abrir el enlace $url';
-    }
+    await launchUrlString(url);
   }
 }

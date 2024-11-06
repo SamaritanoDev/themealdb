@@ -11,7 +11,6 @@ dependencies:
     sdk: flutter
   http: ^1.2.2
   linkfy_text: ^1.1.6
-  linkify: ^5.0.0
   url_launcher: ^6.3.1
 
 dev_dependencies:
